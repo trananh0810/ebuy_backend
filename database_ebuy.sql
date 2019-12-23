@@ -37,9 +37,8 @@ CREATE TABLE Product (
 	id INT AUTO_INCREMENT PRIMARY KEY NOT NULL,
     name NVARCHAR(255) NOT NULL UNIQUE,
     thumnail MEDIUMTEXT NOT NULL,
-    images MEDIUMTEXT,
     qrcode MEDIUMTEXT NOT NULL,
-    quantity int NOT NULL,
+    price int not null,
     createdDate DATETIME NOT NULL,
     categoryID INT NOT NULL,
     FOREIGN KEY (categoryID) REFERENCES Category(id)
