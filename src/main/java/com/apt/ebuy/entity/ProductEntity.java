@@ -5,17 +5,38 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-@Table(name = "product", schema = "ebuy", catalog = "")
+@Table(name = "product", schema = "ebuy")
 public class ProductEntity {
     private int id;
     private String name;
     private String thumnail;
-    private String images;
     private String qrcode;
-    private int quantity;
+    private int price;
     private Timestamp createdDate;
+    private CategoryEntity category;
+
+    public ProductEntity() {
+    }
+
+    public ProductEntity(String name, String thumnail, String qrcode, int price, CategoryEntity category) {
+        this.name = name;
+        this.thumnail = thumnail;
+        this.qrcode = qrcode;
+        this.price = price;
+        this.category = category;
+    }
+
+    public ProductEntity(int id, String name, String thumnail, String qrcode, int price, CategoryEntity category) {
+        this.id = id;
+        this.name = name;
+        this.thumnail = thumnail;
+        this.qrcode = qrcode;
+        this.price = price;
+        this.category = category;
+    }
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     public int getId() {
         return id;
@@ -46,16 +67,6 @@ public class ProductEntity {
     }
 
     @Basic
-    @Column(name = "images")
-    public String getImages() {
-        return images;
-    }
-
-    public void setImages(String images) {
-        this.images = images;
-    }
-
-    @Basic
     @Column(name = "qrcode")
     public String getQrcode() {
         return qrcode;
@@ -66,13 +77,13 @@ public class ProductEntity {
     }
 
     @Basic
-    @Column(name = "quantity")
-    public int getQuantity() {
-        return quantity;
+    @Column(name = "price")
+    public int getPrice() {
+        return price;
     }
 
-    public void setQuantity(int quantity) {
-        this.quantity = quantity;
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     @Basic
@@ -85,22 +96,31 @@ public class ProductEntity {
         this.createdDate = createdDate;
     }
 
+    @ManyToOne
+    @Column(name = "categoryID")
+    public CategoryEntity getCategory() {
+        return category;
+    }
+
+    public void setCategory(CategoryEntity category) {
+        this.category = category;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         ProductEntity that = (ProductEntity) o;
         return id == that.id &&
-                quantity == that.quantity &&
+                price == that.price &&
                 Objects.equals(name, that.name) &&
                 Objects.equals(thumnail, that.thumnail) &&
-                Objects.equals(images, that.images) &&
                 Objects.equals(qrcode, that.qrcode) &&
                 Objects.equals(createdDate, that.createdDate);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, thumnail, images, qrcode, quantity, createdDate);
+        return Objects.hash(id, name, thumnail, qrcode, price, createdDate);
     }
 }

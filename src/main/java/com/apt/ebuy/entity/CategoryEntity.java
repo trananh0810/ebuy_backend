@@ -1,16 +1,35 @@
 package com.apt.ebuy.entity;
 
 import javax.persistence.*;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
-@Table(name = "category", schema = "ebuy", catalog = "")
+@Table(name = "category", schema = "ebuy")
 public class CategoryEntity {
     private int id;
     private String name;
     private String thumnail;
+    private List<ProductEntity> productList;
+
+    public CategoryEntity() {
+        super();
+    }
+
+    public CategoryEntity(String name, String thumnail) {
+        super();
+        this.name = name;
+        this.thumnail = thumnail;
+    }
+
+    public CategoryEntity(int id, String name, String thumnail) {
+        this.id = id;
+        this.name = name;
+        this.thumnail = thumnail;
+    }
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     public int getId() {
         return id;
@@ -38,6 +57,15 @@ public class CategoryEntity {
 
     public void setThumnail(String thumnail) {
         this.thumnail = thumnail;
+    }
+
+    @OneToMany(mappedBy = "category")
+    public List<ProductEntity> getProductList() {
+        return productList;
+    }
+
+    public void setProductList(List<ProductEntity> productList) {
+        this.productList = productList;
     }
 
     @Override

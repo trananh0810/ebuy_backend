@@ -4,13 +4,28 @@ import javax.persistence.*;
 import java.util.Objects;
 
 @Entity
-@Table(name = "province", schema = "ebuy", catalog = "")
+@Table(name = "province", schema = "ebuy")
 public class ProvinceEntity {
     private int id;
     private String name;
     private String code;
 
+    public ProvinceEntity() {
+    }
+
+    public ProvinceEntity(String name, String code) {
+        this.name = name;
+        this.code = code;
+    }
+
+    public ProvinceEntity(int id, String name, String code) {
+        this.id = id;
+        this.name = name;
+        this.code = code;
+    }
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     public int getId() {
         return id;

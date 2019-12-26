@@ -3,10 +3,7 @@ package com.apt.ebuy.controller;
 import com.apt.ebuy.model.ProvinceModel;
 import com.apt.ebuy.service.ProvinceService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -27,5 +24,11 @@ public class ProvinceController {
     public ProvinceModel form(@ModelAttribute ProvinceModel search){
         ProvinceModel model = provinceService.findById(search.getProvinceId());
         return model;
+    }
+
+    @DeleteMapping("/delete")
+    public boolean delete(@ModelAttribute ProvinceModel model) {
+//        boolean serviceDelete = provinceService
+        return true;
     }
 }

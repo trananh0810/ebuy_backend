@@ -5,13 +5,14 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-@Table(name = "orders", schema = "ebuy", catalog = "")
+@Table(name = "orders", schema = "ebuy")
 public class OrdersEntity {
     private int id;
     private Timestamp createdDate;
     private int status;
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     public int getId() {
         return id;

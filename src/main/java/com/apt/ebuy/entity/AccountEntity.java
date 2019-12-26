@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 import java.util.Objects;
 
 @Entity
-@Table(name = "account", schema = "ebuy", catalog = "")
+@Table(name = "account", schema = "ebuy")
 public class AccountEntity {
     private int id;
     private String fullName;
@@ -13,7 +13,24 @@ public class AccountEntity {
     private String password;
     private Timestamp createdDate;
 
+    public AccountEntity() {
+    }
+
+    public AccountEntity(String fullName, String email, String password) {
+        this.fullName = fullName;
+        this.email = email;
+        this.password = password;
+    }
+
+    public AccountEntity(int id, String fullName, String email, String password) {
+        this.id = id;
+        this.fullName = fullName;
+        this.email = email;
+        this.password = password;
+    }
+
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     public int getId() {
         return id;
